@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web GIS Project - Afşin</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div id="map" style="height: 500px;"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Haritayı Afşin ilçesi merkezine ayarla
+        var map = L.map('map').setView([38.2393, 36.9148], 13); // Afşin koordinatları
+
+        // OpenStreetMap taban katmanını ekle
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Afşin'deki okulları ekle
+        var schools = [
+            { name: "Afşin Anadolu Lisesi", location: [38.400965, 36.710791] },
+            { name: "Afşin Fen Lisesi", location: [38.231798, 36.943389] },
+            { name: "Afşin İmam Hatip Lisesi", location: [38.410756, 36.712924] },
+            { name: "Afşin Sağlık Meslek Lisesi", location: [38.241599, 36.898107] },
+            { name: "Afşin Eshabı Kehf Anadolu Lisesi", location: [38.2388, 36.9135] }
+        ];
+
+        // Marker'ları ekle
+        schools.forEach(school => {
+            L.marker(school.location)
+                .addTo(map)
+                .bindPopup(`<b>${school.name}</b>`);
+        });
+    </script>
+</body>
+</html>
